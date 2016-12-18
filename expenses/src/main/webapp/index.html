@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Expense</title>
-<link rel="stylesheet" href="css/expense.css">
-<script type="text/javascript" src="js/external/jquery.js"></script>
-<script type="text/javascript" src="js/expense.js"></script>
-<script type="text/javascript" src="js/list.js"></script>
+	<meta charset="UTF-8">
+	<title>Expense</title>
+	<link rel="stylesheet" href="css/expense.css">
+	<script type="text/javascript" src="js/external/jquery.js"></script>
+	<script type="text/javascript" src="js/expense.js"></script>
+	<script type="text/javascript" src="js/list.js"></script>
 </head>
+
 <body>
 	<h1>Expenses</h1>
 	<div class=home>
 		<ul id="mainmenu">
 			<li id=cus class=active onclick="addExpense()">Add Expense</li>
 			<li id=dropbtn class=active onclick="">Statement</li>
-			<div class=dropdown>
-				<div class="dropdown-content">
-					<a id="bydate" class=sub onclick="getByDate()">GetStatmentByDate</a>
-					<a id="bycategory" class=sub onclick="getByCategory()">GetStatementByCategory</a>
-					<a id="getAll" class=sub onclick="getAllExpenseDetail()">GetAllExpenseDetail</a>
-				</div>
-			</div>
 		</ul>
+	</div>
+	<div class=dropdown>
+		<div class="dropdown-content">
+			<a id="bydate" class=sub onclick="getByDate()">GetStatmentByDate</a>
+			<a id="bycategory" class=sub onclick="getByCategory()">GetStatementByCategory</a>
+			<a id="getAll" class=sub onclick="getAllExpenseDetail()">GetAllExpenseDetail</a>
+		</div>
 	</div>
 	<div>
 		<p id="msg"></p>
@@ -34,4 +36,5 @@
 	</center>
 
 </body>
+
 </html>
