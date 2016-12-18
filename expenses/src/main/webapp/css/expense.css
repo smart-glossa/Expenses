@@ -27,11 +27,11 @@ li , .dropbtn {
     text-decoration: none;
 }
 
-li:hover, .dropdown:hover .dropbtn {
+li:hover, .dropdown:hover  {
     background-color: red;
 }
 
-li.dropdown {
+li.dropbtn {
     display: inline-block;
 }
 
