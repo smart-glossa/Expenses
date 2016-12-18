@@ -8,7 +8,7 @@ function addExpense(){
 	html += "<\/tr>";
 	html += "<tr>";
 	html += "<td>Amount<span>*<\/span>:<\/td>";
-	html += "<td><input type=\"text\" id=\"amt\" placehloder=\"Ex:100\"><\/td>";
+	html += "<td><input type=\"text\" id=\"amt\" placeholder=\"Ex:100\"><\/td>";
 	html += "<\/tr>";
 	html += "<tr>";
 	html += "<td>Date<span>*<\/span>:<\/td>";

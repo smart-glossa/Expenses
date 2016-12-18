@@ -11,10 +11,13 @@
 <body>
 <h1>Expenses</h1>
 <div class=home>
-<ul>
+<ul id="mainmenu">
   <li id=cus class=active onclick="addExpense()">Add Expense</li>
-  <li id=pay onclick="payment()">Payment</li>
-  <li id=sta onclick="statement()">Statement</li>
+  <li id=sta onclick="">Statement</li>
+  <ul id="submenu">
+  <li id="bydate" onclick="">GetStatmentByDate</li>
+  <li id="bycategory" onclick="">GetStatementByCategory</li>
+  </ul>
 </ul>
 </div>
 <div><p id="msg"></p></div>

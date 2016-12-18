@@ -30,7 +30,7 @@ public class ExpenseServlet extends HttpServlet {
 		if(op.equals("addExpense")){
 			JSONObject obj = new JSONObject();
 			String category = request.getParameter("category");
-			float amount = Float.parseFloat(request.getParameter("amnt"));
+			float amount = Float.parseFloat(request.getParameter("amount"));
 			String date = request.getParameter("date");
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
@@ -99,9 +99,9 @@ public class ExpenseServlet extends HttpServlet {
 				Statement stmt = conn.createStatement();
 				String query = "Delete from expense where expenseId="+ exId;
 				stmt.execute(query);
-				obj.put("status", "0");
-			} catch (Exception e) {
 				obj.put("status", "1");
+			} catch (Exception e) {
+				obj.put("status", "0");
 				e.printStackTrace();
 			}
 			response.getWriter().print(obj);
