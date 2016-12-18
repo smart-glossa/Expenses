@@ -44,8 +44,8 @@ public class ExpenseServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			response.getWriter().print(obj);
-		}else if(op.equals("getExpense")){
-			JSONObject obj = new JSONObject();
+		}else if(op.equals("getExpenseByDate")){
+			JSONArray result = new JSONArray();
 			String date = request.getParameter("date");
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
@@ -53,16 +53,19 @@ public class ExpenseServlet extends HttpServlet {
 				Statement stmt = conn.createStatement();
 				String query = "select *from expense where date='"+ date +"'";
 				ResultSet rs = stmt.executeQuery(query);
-				if(rs.next()){
+				while(rs.next()){
+					JSONObject obj = new JSONObject();
 					obj.put("category", rs.getString("category"));
 					obj.put("amount", rs.getInt("amount"));
-					
+					result.put(obj);
 				}
 			} catch (Exception e) {
+				JSONObject obj = new JSONObject();
 				obj.put("status", "0");
+				result.put(obj);
 				e.printStackTrace();
 			}
-			response.getWriter().print(obj);
+			response.getWriter().print(result);
 		}else if(op.equals("getAll")){
 			JSONArray result = new JSONArray();
 			
@@ -102,6 +105,28 @@ public class ExpenseServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			response.getWriter().print(obj);
+		}else if(op.equals("getExpenseByCategory")){
+			JSONArray result = new JSONArray();
+			String category = request.getParameter("category");
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/expense", "root", "root");
+				Statement stmt = conn.createStatement();
+				String query = "select *from expense where category='"+ category +"'";
+				ResultSet rs = stmt.executeQuery(query);
+				while(rs.next()){
+					JSONObject obj = new JSONObject();
+					obj.put("date", rs.getString("date"));
+					obj.put("amount", rs.getInt("amount"));
+					result.put(obj);
+				}
+			} catch (Exception e) {
+				JSONObject obj = new JSONObject();
+				obj.put("status", "0");
+				result.put(obj);
+				e.printStackTrace();
+			}
+			response.getWriter().print(result);
 		}
 	}
 
