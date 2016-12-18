@@ -51,7 +51,7 @@ public class ExpenseServlet extends HttpServlet {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/expense", "root", "root");
 				Statement stmt = conn.createStatement();
-				String query = "select *from expense where date="+ date;
+				String query = "select *from expense where date='"+ date +"'";
 				ResultSet rs = stmt.executeQuery(query);
 				if(rs.next()){
 					obj.put("category", rs.getString("category"));
@@ -60,6 +60,45 @@ public class ExpenseServlet extends HttpServlet {
 				}
 			} catch (Exception e) {
 				obj.put("status", "0");
+				e.printStackTrace();
+			}
+			response.getWriter().print(obj);
+		}else if(op.equals("getAll")){
+			JSONArray result = new JSONArray();
+			
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/expense", "root", "root");
+				Statement stmt = conn.createStatement();
+				String query = "select *from expense";
+				ResultSet rs = stmt.executeQuery(query);
+				while(rs.next()){
+					JSONObject obj = new JSONObject();
+					obj.put("eId", rs.getInt("expenseId"));
+					obj.put("category", rs.getString("category"));
+					obj.put("amount", rs.getInt("amount"));
+					obj.put("date", rs.getInt("date"));
+					result.put(obj);
+				}
+			} catch (Exception e) {
+				JSONObject obj = new JSONObject();
+				obj.put("status", "0");
+				result.put(obj);
+				e.printStackTrace();
+			}
+			response.getWriter().print(result);
+		}else if(op.equals("deleteExpense")){
+			JSONObject obj = new JSONObject();
+			int exId = Integer.parseInt(request.getParameter("exId"));
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/expense", "root", "root");
+				Statement stmt = conn.createStatement();
+				String query = "Delete from expense where expenseId="+ exId;
+				stmt.execute(query);
+				obj.put("status", "0");
+			} catch (Exception e) {
+				obj.put("status", "1");
 				e.printStackTrace();
 			}
 			response.getWriter().print(obj);
