@@ -21,3 +21,33 @@ function addExpense(){
 	html += "<\/center>";
 	$('.Exp')[0].innerHTML = html;
 }
+function getByDate(){
+	var html = "";
+	html += "<center>";
+	html += "<table>";
+	html += "<tr>";
+	html += "<td>Date<span>*<\/span>:<\/td>";
+	html += "<td><input placeholder=\"Date\" class=\"textbox\" type=\"text\" onfocus=\"(this.type='date')\"  id=\"dat\"><\/td>";
+	html += "</tr>";
+	html += "<tr>";
+	html += "<td></td>";
+	html += "<td><input type=\"submit\" value=\"GetDetail\" id=\"getByDate\"></td>"
+	html += "<\/table>";
+	html += "<\/center>";
+	$('.input')[0].innerHTML = html;
+}
+function getByCategory(){
+	var html = "";
+	html += "<center>";
+	html += "<table>";
+	html += "<tr>";
+	html += "<td>Category<span>*<\/span>:<\/td>";
+	html += "<td><input placeholder=\"Category\" class=\"textbox\" type=\"text\"  id=\"categ\"><\/td>";
+	html += "</tr>";
+	html += "<tr>";
+	html += "<td></td>";
+	html += "<td><input type=\"submit\" value=\"GetDetail\" id=\"getByCategory\"></td>"
+	html += "<\/table>";
+	html += "<\/center>";
+	$('.input')[0].innerHTML = html;
+}

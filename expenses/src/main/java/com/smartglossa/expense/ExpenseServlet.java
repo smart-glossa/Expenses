@@ -80,7 +80,7 @@ public class ExpenseServlet extends HttpServlet {
 					obj.put("eId", rs.getInt("expenseId"));
 					obj.put("category", rs.getString("category"));
 					obj.put("amount", rs.getInt("amount"));
-					obj.put("date", rs.getInt("date"));
+					obj.put("date", rs.getString("date"));
 					result.put(obj);
 				}
 			} catch (Exception e) {

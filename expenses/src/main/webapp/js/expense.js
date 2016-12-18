@@ -18,7 +18,7 @@ $(document).on('click','#add',function(){
 		return false;
 	}
 	
-	var url = "http://localhost:8080/expenses/expense?operation=addExpense&category="+ category +"&amount="+ amount +"&date="+ date;
+	var url = "/expenses/expense?operation=addExpense&category="+ category +"&amount="+ amount +"&date="+ date;
 	$.ajax({
 		url:url,
 		type:'POST'
@@ -57,6 +57,81 @@ $(document).on('click','#add',function(){
         event.preventDefault(); 
     }
 })
-function getExpenseByDate(){
+function getAllExpenseDetail(){
+	
+		var url = "/expenses/expense?operation=getAll";
+		$.ajax({
+			url:url,
+			type:'POST'
+		})
+	      .done(function(result){
+	    	  var res = JSON.parse(result);
+	    	  var length = res.length;
+	    	  var table = '<table>'
+	    		  table += '<tr><th>SerialNumber</th><th>Date</th><th>Category</th><th>Amount</th></tr>';
+	    	      for(i=0;i<length;i++){
+	    	    	  table += '<tr class="row">'
+	    	    	  table += '<td>'+ res[i].eId +'</td>';
+	    	    	  table += '<td>'+ res[i].date +'</td>';
+	    	    	  table += '<td>'+ res[i].category +'</td>';
+	    	    	  table += '<td>'+ res[i].amount +'</td>';
+	    	      }
+	                  table += '</table>';  
+	                  $('.Exp')[0].innerHTML = table;
+	      })
+		.fail(function(result){
+			alert(result);
+		})
 	
 }
+
+	$(document).on('click','#getByDate',function(){
+		var date = $('#dat').val();
+		var url = "/expenses/expense?operation=getExpenseByDate&date="+ date;
+		$.ajax({
+			url:url,
+			type:'POST'
+		})
+	      .done(function(result){
+	    	  var res = JSON.parse(result);
+	    	  var length = res.length;
+	    	  var table = '<table>'
+	    		  table += '<tr><th>SerialNumber</th><th>Category</th><th>Amount</th></tr>';
+	    	      for(i=0;i<length;i++){
+	    	    	  table += '<tr class="row">'
+	    	    	  table += '<td>'+ i+1 +'</td>'
+	    	    	  table += '<td>'+ res[i].category +'</td>';
+	    	    	  table += '<td>'+ res[i].amount +'</td>';
+	    	      }
+	                  table += '</table>';  
+	                  $('.Exp')[0].innerHTML = table;
+	      })
+		.fail(function(result){
+			alert(result);
+		})
+	})
+	$(document).on('click','#getByCategory',function(){
+		var category = $('#categ').val();
+		var url = "/expenses/expense?operation=getExpenseByCategory&category="+ category;
+		$.ajax({
+			url:url,
+			type:'POST'
+		})
+	      .done(function(result){
+	    	  var res = JSON.parse(result);
+	    	  var length = res.length;
+	    	  var table = '<table>'
+	    		  table += '<tr><th>SerialNumber</th><th>Date</th><th>Amount</th></tr>';
+	    	      for(i=0;i<length;i++){
+	    	    	  table += '<tr class="row">'
+	    	    	  table += '<td>'+ i+1 +'</td>'
+	    	    	  table += '<td>'+ res[i].date +'</td>';
+	    	    	  table += '<td>'+ res[i].amount +'</td>';
+	    	      }
+	                  table += '</table>';  
+	                  $('.Exp')[0].innerHTML = table;
+	      })
+		.fail(function(result){
+			alert(result);
+		})
+	})
