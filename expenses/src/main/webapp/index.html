@@ -3,9 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Expense</title>
+<link rel="stylesheet" href="css/expense.css">
+<script type="text/javascript" src="js/external/jquery.js"></script>
+<script type="text/javascript" src="js/expense.js"></script>
+<script type="text/javascript" src="js/list.js"></script>
 </head>
 <body>
 <h1>Expenses</h1>
+<div class=home>
+<ul>
+  <li id=cus class=active onclick="addExpense()">Add Expense</li>
+  <li id=pay onclick="payment()">Payment</li>
+  <li id=sta onclick="statement()">Statement</li>
+</ul>
+</div>
+<div><p id="msg"></p></div>
+<div class="Exp"></div>
 
 </body>
 </html>
