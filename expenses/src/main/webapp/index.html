@@ -9,21 +9,29 @@
 <script type="text/javascript" src="js/list.js"></script>
 </head>
 <body>
-<h1>Expenses</h1>
-<div class=home>
-<ul id="mainmenu">
-  <li id=cus class=active onclick="addExpense()">Add Expense</li>
-  <li id=sta class=active onclick="">Statement</li>
-  <ul id="submenu">
-  <li id="bydate" class=sub onclick="getByDate()">GetStatmentByDate</li>
-  <li id="bycategory" class=sub onclick="getByCategory()">GetStatementByCategory</li>
-  <li id="getAll" class=sub onclick="getAllExpenseDetail()">GetAllExpenseDetail</li>
-  </ul>
-</ul>
-</div>
-<div><p id="msg"></p></div>
-<center><div class="input"></div></center>
-<center><div class="Exp"></div></center>
+	<h1>Expenses</h1>
+	<div class=home>
+		<ul id="mainmenu">
+			<li id=cus class=active onclick="addExpense()">Add Expense</li>
+			<li id=dropbtn class=active onclick="">Statement</li>
+			<div class=dropdown>
+				<div class="dropdown-content">
+					<a id="bydate" class=sub onclick="getByDate()">GetStatmentByDate</a>
+					<a id="bycategory" class=sub onclick="getByCategory()">GetStatementByCategory</a>
+					<a id="getAll" class=sub onclick="getAllExpenseDetail()">GetAllExpenseDetail</a>
+				</div>
+			</div>
+		</ul>
+	</div>
+	<div>
+		<p id="msg"></p>
+	</div>
+	<center>
+		<div class="input"></div>
+	</center>
+	<center>
+		<div class="Exp"></div>
+	</center>
 
 </body>
 </html>
