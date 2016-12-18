@@ -1,39 +1,48 @@
 package com.smartglossa.expense;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class ExpenseServlet
- */
+import org.json.JSONObject;
+
 public class ExpenseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ExpenseServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String op = request.getParameter("operation");
+		if(op.equals("add")){
+			JSONObject obj = new JSONObject();
+			String category = request.getParameter("category");
+			float amount = Float.parseFloat(request.getParameter("amnt"));
+			String date = request.getParameter("date");
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/expense", "root", "root");
+				Statement stmt = conn.createStatement();
+				String query = "Insert into expense(category,amount,date) values('"+ category +"',"+ amount +",'"+ date +"')";
+				stmt.execute(query);
+				obj.put("status", "1");
+			} catch (Exception e) {
+				obj.put("status", "0");
+				e.printStackTrace();
+			}
+			response.getWriter().print(obj);
+		}
 	}
 
 }
